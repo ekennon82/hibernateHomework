@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 6, 2014 7:15:13 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.motech.hibernate.Grade" table="GRADES">
+    
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        
+        <many-to-one name="student" class="com.motech.hibernate.Student" fetch="join">
+            <column name="STUDENT" />
+        </many-to-one>
+        
+        <many-to-one name="course" class="com.motech.hibernate.Course" fetch="join">
+            <column name="COURSE" />
+        </many-to-one>
+        
+        <property name="grade" type="float">
+            <column name="GRADE" />
+        </property>
+        
+    </class>
+    <query name="QualityPoints">
+ <![CDATA[select sum((grade.grade * course.creditHours)) as qualityPoints from Grade as grade join grade.course as course where grade.student.name = :name]]>
+ </query>
+</hibernate-mapping>

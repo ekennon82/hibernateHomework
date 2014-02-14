@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 6, 2014 6:06:24 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.motech.hibernate.Address" table="ADDRESSES">
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        
+        <property name="addressType">
+            <column name="ADDRESSTYPE" />
+            <type name="org.hibernate.type.EnumType">
+                <param name="type">12</param>
+                <param name="enumClass">com.motech.hibernate.AddressType</param>
+            </type>
+        </property>
+        
+        <property name="addressLine1" type="java.lang.String">
+            <column name="ADDRESSLINE1" />
+        </property>
+        
+        <property name="addressLine2" type="java.lang.String">
+            <column name="ADDRESSLINE2" />
+        </property>
+        
+        <property name="city" type="java.lang.String">
+            <column name="CITY" />
+        </property>
+        
+        
+        <property name="state" type="java.lang.String">
+            <column name="STATE" />
+        </property>
+        
+        <property name="zip" type="java.lang.String">
+            <column name="ZIP" />
+        </property>
+        
+    </class>
+</hibernate-mapping>

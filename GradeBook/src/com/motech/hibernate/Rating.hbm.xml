@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 11, 2014 7:33:43 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+
+    <class name="com.motech.hibernate.Rating" table="RATINGS">
+    
+    
+        <id name="id" type="int">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+        
+        
+        <many-to-one name="instructor" class="com.motech.hibernate.Instructor" fetch="join">
+            <column name="INSTRUCTOR" />
+        </many-to-one>
+        
+        
+        <many-to-one name="course" class="com.motech.hibernate.Course" fetch="join">
+            <column name="COURSE" />
+        </many-to-one>
+        
+        
+        <property name="rating" type="double">
+            <column name="RATING" />
+        </property>
+        
+        
+    </class>
+    <query name="AverageRating">
+ <![CDATA[select sum(rating.rating) from Rating as rating where instructor.lName = :name]]>
+ </query>
+  <query name="countCourses">
+ <![CDATA[select count(*) from Rating where instructor.lName = :name]]>
+ </query>
+</hibernate-mapping>

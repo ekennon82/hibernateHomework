@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 30, 2014 7:41:33 PM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="com.motech.hibernate.Student" table="STUDENTS">
+  <id name="id" type="int">
+   <column name="ID" unique="true"/>
+   <generator class="identity"/>
+  </id>
+  
+  <property generated="never" lazy="false" name="name" type="java.lang.String">
+   <column name="NAME"/>
+  </property>
+  
+  <property generated="never" lazy="false" name="gpa" type="float">
+   <column name="GPA"/>
+  </property>
+  
+  <set name="addresses" cascade="all">
+   <key column="STUDENT_ID"/>
+   <one-to-many class="com.motech.hibernate.Address"/>
+  </set>
+  
+  <set name="courses" cascade="all" table="STUDENTS_COURSES">
+  <key column="STUDENT_ID" />
+  <many-to-many class="com.motech.hibernate.Course" column="COURSE_ID"/>
+  </set>
+  
+  </class>
+   <query name="AttemptedHours">
+ <![CDATA[select sum(courses.creditHours) from Student as student join student.courses as courses where student.name = :name]]>
+ </query>
+</hibernate-mapping>
